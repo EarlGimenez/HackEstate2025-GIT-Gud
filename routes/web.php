@@ -9,6 +9,7 @@ use App\Http\Controllers\EventController;
 // Web routing
 Route::get('/', [TemplateController::class,'index']);
 Route::get('/profile', [TemplateController::class,'profile']);
+Route::get('/property', [TemplateController::class,'property']);
 
 // user handling
 Route::post('/login', [UserController::class,'login']);

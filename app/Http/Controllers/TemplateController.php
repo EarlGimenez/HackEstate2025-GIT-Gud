@@ -10,6 +10,10 @@ class TemplateController extends Controller
         return view('frontend/home');
     }
     public function profile(){
-        return view('frontend/master-profile');
+        return view('frontend/profile');
+    }
+
+    public function property(){
+        return view('frontend/property');
     }
 }
