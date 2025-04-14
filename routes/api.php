@@ -13,7 +13,7 @@ Route::post('/properties', [PropertyController::class, 'store']);
 Route::put('/properties/{id}', [PropertyController::class, 'update']);
 Route::delete('/properties/{id}', [PropertyController::class, 'destroy']);
 Route::get('/properties/area/{area}', [PropertyController::class, 'filterByArea']);
-Route::get('property-area-stats', [PropertyController::class, 'getAreaStats']);
+Route::get('/property-area-stats', [PropertyController::class, 'getAreaStats']);
 
 //these routes are for the events
 Route::post('/events', [EventController::class, 'store']);

@@ -81,9 +81,9 @@ class UserController extends Controller
             'is_broker' => ['required', 'boolean'],
             'is_agent' => ['required', 'boolean'],
             'is_buyer' => ['required', 'boolean'],
-            'license_number' => ['required_if:is_broker,true,is_agent,true', 'string'],
-            'license_expiration_date' => ['required_if:is_broker,true,is_agent,true', 'date'],
-            'agency_name' => ['required_if:is_broker,true,is_agent,true', 'string'],
+            'license_number' => ['required_if:is_broker,true,is_agent,true', 'string', 'nullable'],
+            'license_expiration_date' => ['required_if:is_broker,true,is_agent,true', 'date', 'nullable'],
+            'agency_name' => ['required_if:is_broker,true,is_agent,true', 'string', 'nullable'],
             'phone_number' => ['required', 'regex:/^[0-9]{10,15}$/'],
             'terms_agreed' => ['required', 'accepted'],
         ]);

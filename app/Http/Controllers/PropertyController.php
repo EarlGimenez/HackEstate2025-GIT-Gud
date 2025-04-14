@@ -79,12 +79,24 @@ class PropertyController extends Controller
     }
 
     //gets the properties average price and count by area
+    // public function getAreaStats(){
+    //     $stats = \App\Models\Property::select('propArea')
+    //         ->selectRaw('AVG(propPrice) as avg_price')
+    //         ->selectRaw('COUNT(*) as total_properties')
+    //         ->get();
+
+    //     return response()->json($stats);
+    // }
+
     public function getAreaStats(){
         $stats = \App\Models\Property::select('propArea')
             ->selectRaw('AVG(propPrice) as avg_price')
             ->selectRaw('COUNT(*) as total_properties')
+            ->selectRaw('AVG(latitude) as avg_lat')
+            ->selectRaw('AVG(longitude) as avg_lng')
+            ->groupBy('propArea') 
             ->get();
-
+    
         return response()->json($stats);
     }
 }

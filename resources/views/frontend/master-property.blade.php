@@ -149,6 +149,7 @@ https://templatemo.com/tm-558-klassy-cafe
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+    <!-- Leaflet JS Test code -->
     {{-- <script>
         document.addEventListener("DOMContentLoaded", function () {
             const map = L.map('propertyMap').setView([14.5995, 120.9842], 13); // center on Manila for example
@@ -166,7 +167,8 @@ https://templatemo.com/tm-558-klassy-cafe
         });
     </script> --}}
 
-    <script>
+    {{-- Leaflet JS on 1 property --}}
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function(){
             const propertyId = 1;
             const apiUrl = `http://localhost:8000/api/properties/${propertyId}`;
@@ -197,7 +199,101 @@ https://templatemo.com/tm-558-klassy-cafe
                     console.error("Error loading property:", error);
                 });
         });
+    </script> --}}
+
+    {{-- Leaflet JS on all properties --}}
+    {{-- <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const apiUrl = `http://localhost:8000/api/properties`;
+    
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(properties => {
+                    if (!properties.length) {
+                        console.warn("No properties found.");
+                        return;
+                    }
+    
+                    const firstLat = parseFloat(properties[0].latitude);
+                    const firstLng = parseFloat(properties[0].longitude);
+                    const map = L.map('propertyMap').setView([firstLat, firstLng], 13);
+    
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '© OpenStreetMap'
+                    }).addTo(map);
+    
+                    properties.forEach(property => {
+                        const lat = parseFloat(property.latitude);
+                        const lng = parseFloat(property.longitude);
+                        const price = property.propPrice.toLocaleString();
+                        const name = property.propName;
+                        const desc = property.propDesc;
+    
+                        L.marker([lat, lng])
+                            .addTo(map)
+                            .bindPopup(`<strong>${name}</strong><br>${desc}<br><em>₱${price}</em>`);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error loading properties:", error);
+                });
+        });
+    </script> --}}
+    
+    {{-- Leaflet JS on properties grouped by area --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const apiUrl = `http://localhost:8000/api/property-area-stats`;
+    
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(stats => {
+                    if (!stats.length) {
+                        console.warn("No area stats found.");
+                        return;
+                    }
+    
+                    const map = L.map('propertyMap').setView([14.5995, 120.9842], 12); // Adjust center as needed
+    
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '© OpenStreetMap'
+                    }).addTo(map);
+    
+                    // Loop through each area stat
+                    stats.forEach(area => {
+                        const count = area.total_properties;
+                        const avgPrice = area.avg_price;
+                        const propArea = area.propArea;
+    
+                        // Optional: You may need to provide average lat/lng per area in the backend if you want exact positioning
+                        // For now, we simulate random positions for demo purposes (this part should ideally come from DB)
+                        const lat = 14.5 + Math.random() * 0.3;  // fake coords
+                        const lng = 120.9 + Math.random() * 0.3;
+    
+                        // Dynamic color: green (cheap) to blue (expensive)
+                        const maxPrice = 10000000; // Adjust as needed
+                        const priceRatio = Math.min(avgPrice / maxPrice, 1);
+                        const color = `rgb(${Math.floor((1 - priceRatio) * 0)}, ${Math.floor((1 - priceRatio) * 180)}, ${Math.floor(priceRatio * 255)})`;
+    
+                        const radius = 100 + count * 50;
+    
+                        L.circle([lat, lng], {
+                            color: color,
+                            fillColor: color,
+                            fillOpacity: 0.6,
+                            radius: radius
+                        }).addTo(map)
+                          .bindPopup(`<strong>${propArea}</strong><br>Properties: ${count}<br>Avg Price: ₱${Math.round(avgPrice).toLocaleString()}`);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error loading area stats:", error);
+                });
+        });
     </script>
+    
     
     <!-- Global Init -->
     <script src="assets_property/js/custom.js"></script>
