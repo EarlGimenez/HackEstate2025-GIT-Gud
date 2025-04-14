@@ -10,6 +10,23 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function getUser($id)
+{
+    $user = User::find($id);
+
+    if (!$user) {
+        return response()->json([
+            'code' => 404,
+            'message' => 'User not found'
+        ], 404);
+    }
+
+    return response()->json([
+        'code' => 200,
+        'user' => $user
+    ], 200);
+}
+
     public function logout(Request $request)
     {
         Auth::logout();

@@ -24,5 +24,4 @@ Route::delete('/events/{id}', [EventController::class, 'destroy']);
 
 //these are for handling user authentication
 Route::post('/register', [UserController::class, 'register']);
-Route::post('/login', [UserController::class,'login']);
-Route::post('/login/verify', [UserController::class,'verify']);
+Route::get('/user/{id}', [UserController::class,'getUser']);
