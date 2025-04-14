@@ -16,9 +16,12 @@ class Property extends Model{
         'propDesc',
         'propPrice',
         'propAddress',
+        'propArea',
+        'image_1',
+        'image_2',
+        'image_3',
         'latitude',
         'longitude',
-        'image',
     ];
     
     public function user(){

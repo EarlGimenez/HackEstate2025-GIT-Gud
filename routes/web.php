@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\EventController;
+
 
 // Web routing
 Route::get('/', [TemplateController::class,'index']);

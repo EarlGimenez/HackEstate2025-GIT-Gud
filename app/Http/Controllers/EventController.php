@@ -10,13 +10,13 @@ class EventController extends Controller{
     //show all events
     public function index(){
         $events = Event::all();
-        return response()->json_encode($events);
+        return response()->json($events);
     }
 
     //show a single event
     public function show($id){
         $event = Event::findOrFail($id);
-        return response()->json_encode($event);
+        return response()->json($event);
     }
 
     //create a new event
@@ -36,7 +36,7 @@ class EventController extends Controller{
         ]);
 
         $event = Event::create($validated);
-        return response()->json_encode($event, 201);
+        return response()->json($event, 201);
     }
 
     //edit an event
@@ -57,7 +57,7 @@ class EventController extends Controller{
         ]);
 
         $event->update($validated);
-        return response()->json_encode($event);
+        return response()->json($event);
     }
 
     //delete a event
@@ -65,6 +65,6 @@ class EventController extends Controller{
         $event = Event::findOrFail($id);
         $event->delete();
 
-        return response()->json_encode(['message' => 'Event deleted successfully']);
+        return response()->json(['message' => 'Event deleted successfully']);
     }
 }

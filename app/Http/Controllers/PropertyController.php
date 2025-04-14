@@ -8,104 +8,73 @@ use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
-    // Show all properties
-    public function index()
-    {
-        $properties = Property::with('user')->get();
-        return view('properties.index', compact('properties'));
+    //get all properties
+    public function index(){
+        return response()->json(Property::all(), 200);
     }
 
-    // Show form to create a property
-    public function create()
-    {
-        return view('properties.create');
-    }
+    //get a single property by id
+    public function show($id){
+        $property = Property::find($id);
 
-    // Store new property
-    public function store(Request $request)
-    {
-        $request->validate([
-            'propName' => 'required|string|max:255',
-            'propDesc' => 'required|string',
-            'propPrice' => 'required|numeric',
-            'propAddress' => 'required|string',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-            'image' => 'nullable|image|max:2048',
-        ]);
-
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('property_images', 'public');
+        if(!$property){
+            return response()->json(['message' => 'Property not found'], 404);
         }
 
-        Property::create([
-            'user_id' => Auth::id(),
-            'propName' => $request->propName,
-            'propDesc' => $request->propDesc,
-            'propPrice' => $request->propPrice,
-            'propAddress' => $request->propAddress,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
-            'image' => $imagePath,
-        ]);
-
-        return redirect()->route('properties.index')->with('success', 'Property created successfully!');
+        return response()->json($property, 200);
     }
 
-    // Show one property
-    public function show($id)
-    {
-        $property = Property::findOrFail($id);
-        return view('properties.show', compact('property'));
-    }
-
-    // Show form to edit property
-    public function edit($id)
-    {
-        $property = Property::findOrFail($id);
-        return view('properties.edit', compact('property'));
-    }
-
-    // Update existing property
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'propName' => 'required|string|max:255',
+    //creates a new property
+    public function store(Request $request){
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'propName' => 'required|string',
             'propDesc' => 'required|string',
-            'propPrice' => 'required|numeric',
+            'propPrice' => 'required|integer',
             'propAddress' => 'required|string',
+            'propArea' => 'required|string',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
-            'image' => 'nullable|image|max:2048',
+            'image_1' => 'nullable|string',
+            'image_2' => 'nullable|string',
+            'image_3' => 'nullable|string',
         ]);
 
-        $property = Property::findOrFail($id);
-        $imagePath = $property->image;
+        $property = Property::create($validated);
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('property_images', 'public');
-        }
-
-        $property->update([
-            'propName' => $request->propName,
-            'propDesc' => $request->propDesc,
-            'propPrice' => $request->propPrice,
-            'propAddress' => $request->propAddress,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
-            'image' => $imagePath,
-        ]);
-
-        return redirect()->route('properties.index')->with('success', 'Property updated successfully!');
+        return response()->json($property, 201);
     }
 
-    // Delete property
-    public function destroy($id)
-    {
-        $property = Property::findOrFail($id);
+    //update an existing property
+    public function update(Request $request, $id){
+        $property = Property::find($id);
+
+        if(!$property){
+            return response()->json(['message' => 'Property not found'], 404);
+        }
+
+        $property->update($request->all());
+
+        return response()->json($property, 200);
+    }
+
+    //delete an existing property
+    public function destroy($id){
+        $property = Property::find($id);
+
+        if(!$property){
+            return response()->json(['message' => 'Property not found'], 404);
+        }
+
         $property->delete();
 
-        return redirect()->route('properties.index')->with('success', 'Property deleted successfully!');
+        return response()->json(['message' => 'Property successfully deleted'], 200);
+    }
+
+    //filter property by area
+    public function filterByArea($area){
+        $properties = Property::where('propArea', $area)->get();
+
+        return response()->json($properties, 200);
     }
 }
