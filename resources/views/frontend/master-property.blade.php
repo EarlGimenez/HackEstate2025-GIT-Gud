@@ -149,7 +149,7 @@ https://templatemo.com/tm-558-klassy-cafe
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-    <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function () {
             const map = L.map('propertyMap').setView([14.5995, 120.9842], 13); // center on Manila for example
     
@@ -163,6 +163,39 @@ https://templatemo.com/tm-558-klassy-cafe
                 .addTo(map)
                 .bindPopup('Sample Property')
                 .openPopup();
+        });
+    </script> --}}
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const propertyId = 1;
+            const apiUrl = `http://localhost:8000/api/properties/${propertyId}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const lat = parseFloat(data.latitude);
+                    const lng = parseFloat(data.longitude);
+                    const price = data.propPrice.toLocaleString();
+                    const name = data.propName;
+                    const desc = data.propDesc;
+
+                    const map = L.map('propertyMap').setView([lat,lng], 16);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '© OpenStreetMap'
+                    }).addTo(map);
+
+                    L.marker([lat,lng])
+                        .addTo(map)
+                        .bindPopup(`<strong>${name}</strong><br>${desc}<br><em>₱${price}</em>`)
+                        .openPopup();
+                })
+
+                .catch(error => {
+                    console.error("Error loading property:", error);
+                });
         });
     </script>
     
