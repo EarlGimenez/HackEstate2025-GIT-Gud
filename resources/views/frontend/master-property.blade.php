@@ -243,56 +243,45 @@ https://templatemo.com/tm-558-klassy-cafe
     
     {{-- Leaflet JS on properties grouped by area --}}
     <script>
-        document.addEventListener("DOMContentLoaded", function(){
-            const apiUrl = `http://localhost:8000/api/property-area-stats`;
-    
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(stats => {
-                    if (!stats.length) {
-                        console.warn("No area stats found.");
-                        return;
-                    }
-    
-                    const map = L.map('propertyMap').setView([14.5995, 120.9842], 12); // Adjust center as needed
-    
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        maxZoom: 19,
-                        attribution: '© OpenStreetMap'
-                    }).addTo(map);
-    
-                    // Loop through each area stat
-                    stats.forEach(area => {
+        document.addEventListener("DOMContentLoaded", function () {
+            const map = L.map('propertyMap').setView([14.5995, 120.9842], 12);
+        
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+        
+            fetch("http://localhost:8000/api/property-area-stats")
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(area => {
+                        const lat = parseFloat(area.avg_lat);
+                        const lng = parseFloat(area.avg_lng);
                         const count = area.total_properties;
                         const avgPrice = area.avg_price;
-                        const propArea = area.propArea;
-    
-                        // Optional: You may need to provide average lat/lng per area in the backend if you want exact positioning
-                        // For now, we simulate random positions for demo purposes (this part should ideally come from DB)
-                        const lat = 14.5 + Math.random() * 0.3;  // fake coords
-                        const lng = 120.9 + Math.random() * 0.3;
-    
-                        // Dynamic color: green (cheap) to blue (expensive)
-                        const maxPrice = 10000000; // Adjust as needed
-                        const priceRatio = Math.min(avgPrice / maxPrice, 1);
-                        const color = `rgb(${Math.floor((1 - priceRatio) * 0)}, ${Math.floor((1 - priceRatio) * 180)}, ${Math.floor(priceRatio * 255)})`;
-    
-                        const radius = 100 + count * 50;
-    
+        
+                        // Color logic (green to blue scale based on price range)
+                        let color = '#00FF00'; // default green
+                        if (avgPrice > 4000000) color = '#55ccff';
+                        if (avgPrice > 6000000) color = '#3399ff';
+                        if (avgPrice > 8000000) color = '#0066ff';
+        
+                        // Radius logic based on property count
+                        const radius = 500 + count * 100;
+        
                         L.circle([lat, lng], {
                             color: color,
                             fillColor: color,
-                            fillOpacity: 0.6,
+                            fillOpacity: 0.5,
                             radius: radius
                         }).addTo(map)
-                          .bindPopup(`<strong>${propArea}</strong><br>Properties: ${count}<br>Avg Price: ₱${Math.round(avgPrice).toLocaleString()}`);
+                          .bindPopup(`<strong>${area.propArea}</strong><br>₱${avgPrice.toLocaleString()} avg<br>${count} properties`);
                     });
                 })
-                .catch(error => {
-                    console.error("Error loading area stats:", error);
-                });
+                .catch(err => console.error("Error loading area stats:", err));
         });
-    </script>
+        </script>
+        
     
     
     <!-- Global Init -->
