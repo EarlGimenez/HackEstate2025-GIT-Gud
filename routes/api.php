@@ -6,4 +6,4 @@ use App\Http\Controllers\UserController;
 
 
 Route::post('/register', [UserController::class, 'register']);
-Route::post('/login/verify', [UserController::class,'verify']);
+Route::get('/user/{id}', [UserController::class,'getUser']);
