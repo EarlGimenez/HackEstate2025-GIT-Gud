@@ -29,6 +29,9 @@ https://templatemo.com/tm-558-klassy-cafe
 
     <link rel="stylesheet" href="assets_property/css/lightbox.css">
 
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
     </head>
     
     <body>
@@ -116,10 +119,7 @@ https://templatemo.com/tm-558-klassy-cafe
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-12">
                     <div class="right-content">
-                        <div class="thumb">
-                            <a rel="nofollow" href="http://youtube.com"><i class="fa fa-play"></i></a>
-                            <img src="assets_property/images/about-video-bg.jpg" alt="">
-                        </div>
+                        <div id="propertyMap" style="height: 400px; width: 100%; border-radius: 20px;"></div>
                     </div>
                 </div>
             </div>
@@ -145,6 +145,26 @@ https://templatemo.com/tm-558-klassy-cafe
     <script src="assets_property/js/slick.js"></script> 
     <script src="assets_property/js/lightbox.js"></script> 
     <script src="assets_property/js/isotope.js"></script> 
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const map = L.map('propertyMap').setView([14.5995, 120.9842], 13); // center on Manila for example
+    
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+    
+            // Optional: Add a dummy marker for testing
+            L.marker([14.5995, 120.9842])
+                .addTo(map)
+                .bindPopup('Sample Property')
+                .openPopup();
+        });
+    </script>
     
     <!-- Global Init -->
     <script src="assets_property/js/custom.js"></script>
