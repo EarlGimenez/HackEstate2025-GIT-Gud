@@ -13,10 +13,10 @@
 	<title>Launch - HTML5 Crowdfunding Profile Template</title>
 
 	<!-- Gobal CSS -->
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets_profile/css/bootstrap.min.css" rel="stylesheet">
 	
 	<!-- Template CSS -->
-	<link href="assets/css/style.css" rel="stylesheet">
+	<link href="assets_profile/css/style.css" rel="stylesheet">
 
 	<!--Fonts-->
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -43,7 +43,7 @@
 </head>
 <body>
 	<!--header-->
-	<header class="header">
+	<!-- <header class="header">
 		<div class="container">
 			<div class="row">
 				<div class="goal-summary pull-left">
@@ -65,7 +65,7 @@
 				</div>
 			</div>
 		</div>
-	</header>
+	</header> -->
 	<!--/header-->
 	<!--main content-->
 	<div class="main-content">
@@ -77,7 +77,7 @@
 							<h1>LAUNCH INTO SUCCESS</h1>
 							<span class="type-meta"><i class="fa fa-user"></i> Jonathan Doe</span>
 							<span class="type-meta"><i class="fa fa-tag"></i> <a href="#">crowdfunding</a>, <a href="#">launch</a> </span>
-							<!--img src="assets/img/image-heartbeat.jpg" class="img-responsive" alt="launch HTML5 Crowdfunding"-->
+							<!--img src="assets_profile/img/image-heartbeat.jpg" class="img-responsive" alt="launch HTML5 Crowdfunding"-->
 							<div class="video-frame">
 								<iframe src="https://player.vimeo.com/video/67938315" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 							</div>
@@ -157,7 +157,7 @@
 						<h1 class="section-title">LAUNCH</h1>
 						<div class="profile-contents">
 							<h2 class="position">Sky Rocketing Your Funding Campaign</h2>
-							<img src="assets/img/profile-img.jpg" class="profile-image img responsive" alt="John Doe">
+							<img src="assets_profile/img/profile-img.jpg" class="profile-image img responsive" alt="John Doe">
 							<!--social links-->
 							<ul class="list-inline">
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -241,10 +241,10 @@
 	</footer>
 	
 	<!-- Global jQuery -->
-	<script type="text/javascript" src="assets/js/jquery-1.12.3.min.js"></script>
-	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets_profile/js/jquery-1.12.3.min.js"></script>
+	<script type="text/javascript" src="assets_profile/js/bootstrap.min.js"></script>
 	
 	<!-- Template JS -->
-	<script type="text/javascript" src="assets/js/main.js"></script>
+	<script type="text/javascript" src="assets_profile/js/main.js"></script>
 </body>
 </html>
