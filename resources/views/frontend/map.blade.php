@@ -171,10 +171,21 @@
 		
 			// Helper function to get color based on price
 			function getColor(price) {
-				return price < 1000000 ? 'green' :
-					   price < 5000000 ? 'orange' :
-					   price < 10000000 ? 'purple' :
-					   'blue';
+				const minPrice = 100000;     // Adjust based on your expected lowest price
+				const maxPrice = 10000000;   // Adjust based on your expected highest price
+
+				// Clamp the price between min and max
+				const clamped = Math.max(minPrice, Math.min(price, maxPrice));
+
+				// Calculate the ratio (0 = green, 1 = blue)
+				const ratio = (clamped - minPrice) / (maxPrice - minPrice);
+
+				// Interpolate green to blue
+				const r = 0;
+				const g = Math.round(255 * (1 - ratio));
+				const b = Math.round(255 * ratio);
+
+				return `rgb(${r}, ${g}, ${b})`;
 			}
 		
 			// Group properties by location (latitude+longitude key)
