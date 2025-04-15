@@ -11,6 +11,8 @@ Route::get('/', [TemplateController::class,'index']);
 Route::get('/profile', [TemplateController::class,'profile']);
 Route::get('/property', [TemplateController::class,'property']);
 Route::get('/event', [TemplateController::class,'event']);
+Route::get('/property-list', [TemplateController::class, 'propertyList']);
+Route::get('/users', [TemplateController::class, 'userList']);
 
 // user handling
 Route::post('/login', [UserController::class,'login']);
