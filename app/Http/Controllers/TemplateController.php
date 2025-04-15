@@ -17,6 +17,6 @@ class TemplateController extends Controller
         return view('frontend/property');
     }
     public function event(){
-        return view('frontend/event');
+        return view('frontend/events');
     }
 }
