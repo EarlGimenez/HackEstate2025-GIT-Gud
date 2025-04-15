@@ -196,7 +196,7 @@ https://templatemo.com/tm-558-klassy-cafe
     {{-- <script>
         document.addEventListener("DOMContentLoaded", function(){
             const apiUrl = `http://localhost:8000/api/properties`;
-    
+
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(properties => {

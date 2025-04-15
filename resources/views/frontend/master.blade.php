@@ -95,7 +95,7 @@
 								<a href="/loginview">sign in</a>
 							</li>
 							<li class="header-top-contact">
-								<a href="#">register</a>
+								<a href="/registerview">register</a>
 							</li>
 						</ul>
 					</div>
@@ -126,12 +126,8 @@
 			            <!-- Collect the nav links, forms, and other content for toggling -->
 			            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
 			                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-			                    <li class=" scroll active"><a href="#home">home</a></li>
-			                    <li class="scroll"><a href="#works">how it works</a></li>
-			                    <li class="scroll"><a href="#explore">explore</a></li>
-			                    <li class="scroll"><a href="#reviews">review</a></li>
-			                    <li class="scroll"><a href="#blog">blog</a></li>
-			                    <li class="scroll"><a href="#contact">contact</a></li>		
+			                    <li class=" scroll active"><a href="/">home</a></li>
+			                    <li class="scroll"><a href="/map">map</a></li>	
 			                </ul><!--/.nav -->
 			            </div><!-- /.navbar-collapse -->
 			        </div><!--/.container-->
