@@ -69,15 +69,14 @@
 							<li class="select-opt">
 								<select name="language" id="language">
 									<option value="default">EN</option>
-									<option value="Bangla">BN</option>
-									<option value="Arabic">AB</option>
+									<option value="fili">PH</option>
 								</select>
 							</li>
 							<li class="select-opt">
 								<select name="currency" id="currency">
 									<option value="usd">USD</option>
 									<option value="euro">Euro</option>
-									<option value="bdt">BDT</option>
+									<option value="php">PHP</option>
 								</select>
 							</li>
 							<li class="select-opt">
@@ -119,7 +118,7 @@
 			                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 			                    <i class="fa fa-bars"></i>
 			                </button>
-			                <a class="navbar-brand" href="index.html">list<span>race</span></a>
+			                <a class="navbar-brand" href="index.html">Ease<span>Stay</span></a>
 
 			            </div><!--/.navbar-header-->
 			            <!-- End Header Navigation -->
@@ -1061,7 +1060,7 @@
 		           	<div class="row">
 			           	<div class="col-sm-3">
 			           		 <div class="navbar-header">
-				                <a class="navbar-brand" href="index.html">list<span>race</span></a>
+				                <a class="navbar-brand" href="index.html">Ease<span>Stay</span></a>
 				            </div><!--/.navbar-header-->
 			           	</div>
 			           	<div class="col-sm-9">

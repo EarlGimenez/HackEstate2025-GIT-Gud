@@ -31,4 +31,11 @@ class TemplateController extends Controller
         $users = User::all();
         return view('frontend/userList', compact('users'));
     }
+
+    public function loginview(){
+        return view('frontend/loginview');
+    }
+    public function registerview(){
+        return view('frontend/registerview');
+    }
 }

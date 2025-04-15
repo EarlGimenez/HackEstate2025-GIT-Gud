@@ -58,10 +58,39 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
+            // return response()->json([
+            //     'code' => 200,
+            //     'message' => 'User logged in successfully'
+            // ], 200);
+            return redirect('/');
+        }
+
+        return response()->json([
+            'code' => 401,
+            'message' => 'Invalid credentials'
+        ], 401);
+    }
+
+    public function loginweb(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'username' => ['required'],
+            'password' => ['required'],
+        ]);
+
+        if ($validate->fails()) {
             return response()->json([
-                'code' => 200,
-                'message' => 'User logged in successfully'
-            ], 200);
+                'code' => 422,
+                'message' => $validate->messages()
+            ], 422);
+        }
+
+        $credentials = $request->only('username', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect('/');
         }
 
         return response()->json([
@@ -135,5 +164,42 @@ class UserController extends Controller
 
         // Pass the user data to the view
         return view('frontend/userProfile', compact('user'));
+    }
+    
+    public function registerweb(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'username' => ['required', 'string', 'unique:users,username'],
+            'firstname' => ['required', 'string', 'max:100'],
+            'lastname' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'string', 'min:8'],
+            'is_broker' => ['required', 'boolean', 'nullable'],
+            'is_agent' => ['required', 'boolean', 'nullable'],
+            'is_buyer' => ['required', 'boolean', 'nullable'],
+            'license_number' => ['required_if:is_broker,true,is_agent,true', 'string', 'nullable'],
+            'license_expiration_date' => ['required_if:is_broker,true,is_agent,true', 'date', 'nullable'],
+            'agency_name' => ['required_if:is_broker,true,is_agent,true', 'string', 'nullable'],
+            'phone_number' => ['required', 'regex:/^[0-9]{10,15}$/'],
+            'terms_agreed' => ['required'],
+        ]);
+
+        $user = new User;
+        $user->username = $request->username;
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->is_broker = $request->is_broker ?? 0;
+        $user->is_agent = $request->is_agent ?? 0;
+        $user->is_buyer = $request->is_buyer ?? 0;    
+        $user->license_number = $request->license_number;
+        $user->license_expiration_date = $request->license_expiration_date;
+        $user->agency_name = $request->agency_name;
+        $user->phone_number = $request->phone_number;
+        $user->terms_agreed = $request->has('terms_agreed') ? 1 : 0;
+        $user->save();
+
+        return redirect('/loginview');
     }
 }
