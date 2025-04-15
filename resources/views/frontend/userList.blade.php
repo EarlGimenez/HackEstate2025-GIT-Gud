@@ -19,7 +19,7 @@
 
     @foreach ($users as $user)
         <div class="user-card">
-            <p><strong>Username:</strong> {{ $user->username }}</p>
+            <p><strong>Username:</strong> <a href="{{ route('userProfile', ['id' => $user->id]) }}" style="text-decoration: none; color: inherit;">{{ $user->username }}</a></p>
             <p><strong>Name:</strong> {{ $user->firstname }} {{ $user->lastname }}</p>
             <p><strong>Email:</strong> {{ $user->email }}</p>
             <p><strong>Phone:</strong> {{ $user->phone_number }}</p>

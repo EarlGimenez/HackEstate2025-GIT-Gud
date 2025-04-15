@@ -157,6 +157,15 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function show($id)
+    {
+        // Fetch the user data
+        $user = User::findOrFail($id); // Or use Eloquent if you need custom queries
+
+        // Pass the user data to the view
+        return view('frontend/userProfile', compact('user'));
+    }
+    
     public function registerweb(Request $request)
     {
         $validate = Validator::make($request->all(), [

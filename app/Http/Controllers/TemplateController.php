@@ -42,4 +42,5 @@ class TemplateController extends Controller
     public function map(){
         return view('frontend/map');
     }
+    
 }
