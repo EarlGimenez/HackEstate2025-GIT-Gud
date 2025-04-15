@@ -65,7 +65,7 @@
 			<ul>
 				<li>
 					<div class="header-top-left">
-						<ul>
+						<ul class="second-ul">
 							<li class="select-opt">
 								<select name="language" id="language">
 									<option value="default">EN</option>
@@ -89,10 +89,10 @@
 					<div class="header-top-right">
 						<ul>
 							<li class="header-top-contact">
-								+1 222 777 6565
+								User Name
 							</li>
 							<li class="header-top-contact">
-								<a href="#">sign in</a>
+								<a href="/loginview">sign in</a>
 							</li>
 							<li class="header-top-contact">
 								<a href="#">register</a>

@@ -159,10 +159,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        // Fetch the user data
-        $user = User::findOrFail($id); // Or use Eloquent if you need custom queries
-
-        // Pass the user data to the view
+        $user = User::with('properties')->findOrFail($id);
         return view('frontend/userProfile', compact('user'));
     }
     

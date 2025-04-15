@@ -4,7 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <!-- Add any required CSS here -->
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 2rem;
+        }
+        .property-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -13,12 +28,26 @@
         <!-- Display user info -->
         <p><strong>Username:</strong> {{ $user->username }}</p>
         <p><strong>Email:</strong> {{ $user->email }}</p>
-        <p><strong>Full Name:</strong> {{ $user->full_name }}</p>
+        <p><strong>Full Name:</strong> {{ $user->firstname }} {{ $user->lastname }}</p>
 
-        <!-- Add more fields as needed -->
+        <hr>
 
-        <!-- Link back to the user list -->
-        <a href="{{ route('userList') }}">Back to user list</a>
+        <h2>Properties Listed by {{ $user->firstname }}</h2>
+
+        @if ($user->properties->count() > 0)
+            @foreach ($user->properties as $property)
+                <div class="property-card">
+                    <h3>{{ $property->propName }}</h3>
+                    <p>{{ $property->propDesc }}</p>
+                    <p><strong>Price:</strong> ${{ number_format($property->propPrice, 2) }}</p>
+                    <a href="{{ route('propertyDetails', ['id' => $property->id]) }}">View Details</a>
+                </div>
+            @endforeach
+        @else
+            <p>This user has not listed any properties.</p>
+        @endif
+
+        <a href="{{ route('userList') }}">← Back to user list</a>
     </div>
 </body>
 </html>
