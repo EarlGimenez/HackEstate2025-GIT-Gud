@@ -25,3 +25,13 @@ Route::get('/registerview', [TemplateController::class,'registerview']);
 Route::post('/login', [UserController::class,'login']);
 Route::post('/logout', [UserController::class,'logout']);
 Route::post('/register', [UserController::class,'registerweb']); //register, registerweb
+
+//mock creation
+
+Route::get('/scan-id', function () {
+    return view('scan-id');
+})->name('scan.id');
+
+Route::get('/scan-face', function () {
+    return view('scan-face');
+})->name('scan.face');
