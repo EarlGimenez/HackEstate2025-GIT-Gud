@@ -11,7 +11,10 @@ Route::get('/', [TemplateController::class,'index']);
 Route::get('/profile', [TemplateController::class,'profile']);
 Route::get('/property', [TemplateController::class,'property']);
 Route::get('/event', [TemplateController::class,'event']);
+Route::get('/loginview', [TemplateController::class,'loginview']);
+Route::get('/registerview', [TemplateController::class,'registerview']);
 
 // user handling
 Route::post('/login', [UserController::class,'login']);
 Route::post('/logout', [UserController::class,'logout']);
+Route::post('/register', [UserController::class,'registerweb']); //register, registerweb

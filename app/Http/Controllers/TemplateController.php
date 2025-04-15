@@ -19,4 +19,11 @@ class TemplateController extends Controller
     public function event(){
         return view('frontend/events');
     }
+
+    public function loginview(){
+        return view('frontend/loginview');
+    }
+    public function registerview(){
+        return view('frontend/registerview');
+    }
 }

@@ -112,6 +112,26 @@ nav.bootsnav.navbar-full .navbar-header{
     width: 100%;
 }
 
+.header-top-right {
+    background-color: #f8f9fa; /* Light background for better visibility */
+    padding: 5px 10px; /* Add padding for spacing */
+    font-size: 16px; /* Increase font size */
+    font-weight: bold; /* Make text bold */
+    color: #333; /* Darker text color for contrast */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add subtle shadow */
+}
+
+.header-top-right a {
+    color: #ff545a; /* Make links more prominent */
+    text-decoration: none; /* Remove underline */
+}
+
+.header-top-right a:hover {
+    color: #f8151c; /* Darker color on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
+
 nav.bootsnav.navbar-full .navbar-toggle{
     display: inline-block;
     margin-right: 0;
@@ -1280,7 +1300,7 @@ body.on-side .wrap-sticky nav.navbar.bootsnav.sticked{
     /* Tabs
     =================================*/ 
     nav.navbar.bootsnav .megamenu-content.tabbed{
-        padding-left: 0 !mportant;
+        padding-left: 0 !important;
     }
     
     nav.navbar.bootsnav .tabbed > li{
