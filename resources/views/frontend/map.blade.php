@@ -54,7 +54,7 @@
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		
         <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/5shiv/3.7.3/5shiv.min.js"></script>
 			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
@@ -118,7 +118,7 @@
 			                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 			                    <i class="fa fa-bars"></i>
 			                </button>
-			                <a class="navbar-brand" href="/html">Ease<span>Stay</span></a>
+			                <a class="navbar-brand" href="/">Ease<span>Stay</span></a>
 
 			            </div><!--/.navbar-header-->
 			            <!-- End Header Navigation -->
@@ -150,7 +150,7 @@
         <div class="welcome-hero-form">
             <div class="single-welcome-hero-form">
                 <h3>what?</h3>
-                <form action="/html">
+                <form action="/">
                     <input type="text" placeholder="Ex: palce, resturent, food, automobile" />
                 </form>
                 <div class="welcome-hero-form-icon">
@@ -159,7 +159,7 @@
             </div>
             <div class="single-welcome-hero-form">
                 <h3>location</h3>
-                <form action="/html">
+                <form action="/">
                     <input type="text" placeholder="Ex: london, newyork, rome" />
                 </form>
                 <div class="welcome-hero-form-icon">
