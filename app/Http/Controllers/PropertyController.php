@@ -99,4 +99,11 @@ class PropertyController extends Controller
     
         return response()->json($stats);
     }
+
+    public function propertyDetails($id)
+    {
+        $property = Property::findOrFail($id); // for now, basic retrieval
+
+        return view('frontend/propertyDetails', compact('property'));
+    }
 }
