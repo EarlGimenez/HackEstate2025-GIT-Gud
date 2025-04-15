@@ -21,6 +21,35 @@
 	<!--Fonts-->
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+	<link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png"/>
+       
+	<!--font-awesome.min.css-->
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+	<!--linear icon css-->
+	<link rel="stylesheet" href="assets/css/linearicons.css">
+
+	<!--animate.css-->
+	<link rel="stylesheet" href="assets/css/animate.css">
+
+	<!--flaticon.css-->
+	<link rel="stylesheet" href="assets/css/flaticon.css">
+
+	<!--slick.css-->
+	<link rel="stylesheet" href="assets/css/slick.css">
+	<link rel="stylesheet" href="assets/css/slick-theme.css">
+	
+	<!--bootstrap.min.css-->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	
+	<!-- bootsnav -->
+	<link rel="stylesheet" href="assets/css/bootsnav.css" >	
+	
+	<!--style.css-->
+	<link rel="stylesheet" href="assets/css/style.css">
+	
+	<!--responsive.css-->
+	<link rel="stylesheet" href="assets/css/responsive.css">
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,6 +71,48 @@
 	</script>
 </head>
 <body>
+	<header id="header-top" class="header-top">
+		<ul>
+			<li>
+				<div class="header-top-left">
+					<ul class="second-ul">
+						<li class="select-opt">
+							<select name="language" id="language">
+								<option value="default">EN</option>
+								<option value="fili">PH</option>
+							</select>
+						</li>
+						<li class="select-opt">
+							<select name="currency" id="currency">
+								<option value="usd">USD</option>
+								<option value="euro">Euro</option>
+								<option value="php">PHP</option>
+							</select>
+						</li>
+						<li class="select-opt">
+							<a href="#"><span class="lnr lnr-magnifier"></span></a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<li class="head-responsive-right pull-right">
+				<div class="header-top-right">
+					<ul>
+						<li class="header-top-contact">
+							User Name
+						</li>
+						<li class="header-top-contact">
+							<a href="/loginview">sign in</a>
+						</li>
+						<li class="header-top-contact">
+							<a href="#">register</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+				
+	</header><!--/.header-top-->
 	<!--header-->
 	<!-- <header class="header">
 		<div class="container">
@@ -167,39 +238,35 @@
 								<li><a href="#"><i class="fa fa-git"></i></a></li>
 							</ul>
 							<!--/social links-->
-							<a href="#" class="btn btn-contact"><i class="fa fa-envelope"></i>CONTACT US</a>
+							<form action="/scan-id" method="POST">
+								@csrf
+								<button class="btn btn-contact">
+									VERIFY USER
+								</button>
+							</form>
+							<a href="/add-property" class="btn btn-contact">
+								ADD PROPERTY
+							</a>
 						</div>
 					</div>
 					<div class="section-block">
-						<h1 class="section-title">REWARDS</h1>
-						<!--reward blocks-->
+						<h1 class="section-title">PROPERTIES</h1>
 						<div class="reward-block">
-							<h3>$10</h3>
-							<h2>Early Bird</h2>
-							<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-							<span><i class="fa fa-users"></i> 180 backers</span>
-							<a href="" class="btn btn-reward">GET THIS REWARD</a>
-						</div>
-						<div class="reward-block popular">
-							<h3>$20</h3>
-							<h2>Value Bird</h2>
-							<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-							<span><i class="fa fa-users"></i> 320 backers</span>
-							<a href="" class="btn btn-reward">GET THIS REWARD</a>
-						</div>
-						<div class="reward-block">
-							<h3>$30</h3>
-							<h2>Super Bird</h2>
-							<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-							<span><i class="fa fa-users"></i> 105 backers</span>
-							<a href="" class="btn btn-reward">GET THIS REWARD</a>
-						</div>
-						<div class="reward-block last">
-							<h3>$50</h3>
-							<h2>Premium Bird</h2>
-							<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-							<span><i class="fa fa-users"></i> 64 backers</span>
-							<a href="" class="btn btn-reward">GET THIS REWARD</a>
+							@foreach($properties as $property)
+							<div class="bg-white rounded-lg shadow p-4">
+								<img src="{{ asset('storage/images/' . ($property->image_1 ?? 'placeholder.jpg')) }}"
+									alt="{{ $property->propName }}"
+									class="w-full h-40 object-cover rounded mb-3">
+								<h2 class="text-lg font-semibold">
+									<a href="{{ route('propertyDetails', ['id' => $property->id]) }}" class="text-blue-500 hover:underline">
+										{{ $property->propName }}
+									</a>
+								</h2>
+								<p class="text-sm text-gray-600 mb-1">{{ $property->propAddress }}</p>
+								<p class="text-sm text-gray-800">{{ Str::limit($property->propDesc, 80) }}</p>
+								<p class="text-blue-600 font-semibold mt-2">₱{{ number_format($property->propPrice) }}</p>
+							</div>
+							@endforeach
 						</div>
 						<!--/reward blocks-->
 					</div>

@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
+    public function showAddPropertyForm()
+    {
+        return view('frontend.addproperty');
+    }
+
     //get all properties
     public function index(){
         return response()->json(Property::all(), 200);
@@ -43,6 +48,26 @@ class PropertyController extends Controller
         $property = Property::create($validated);
 
         return response()->json($property, 201);
+    }
+
+    public function addproperty(Request $request){
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'propName' => 'required|string',
+            'propDesc' => 'required|string',
+            'propPrice' => 'required|integer',
+            'propAddress' => 'required|string',
+            'propArea' => 'required|string',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'image_1' => 'nullable|string',
+            'image_2' => 'nullable|string',
+            'image_3' => 'nullable|string',
+        ]);
+
+        $property = Property::create($validated);
+
+        return redirect('/profile');
     }
 
     //update an existing property

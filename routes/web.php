@@ -20,7 +20,8 @@ Route::get('/user/{id}', [UserController::class, 'show'])->name('userProfile');
 Route::get('/loginview', [TemplateController::class,'loginview']);
 Route::get('/registerview', [TemplateController::class,'registerview']);
 Route::get('/map', [TemplateController::class,'map']);
-
+Route::get('/add-property', [PropertyController::class, 'showAddPropertyForm'])->name('addproperty.form');
+Route::post('/add-property', [PropertyController::class, 'addproperty'])->name('addproperty.submit');
 
 // user handling
 Route::post('/login', [UserController::class,'login']);
@@ -29,7 +30,7 @@ Route::post('/register', [UserController::class,'registerweb']);
 
 //mock creation
 
-Route::get('/scan-id', function () {
+Route::post('/scan-id', function () {
     return view('scan-id');
 })->name('scan.id');
 
