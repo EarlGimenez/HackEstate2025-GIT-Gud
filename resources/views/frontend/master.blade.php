@@ -118,7 +118,7 @@
 			                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 			                    <i class="fa fa-bars"></i>
 			                </button>
-			                <a class="navbar-brand" href="index.html">Ease<span>Stay</span></a>
+			                <a class="navbar-brand" href="/">Ease<span>Stay</span></a>
 
 			            </div><!--/.navbar-header-->
 			            <!-- End Header Navigation -->
@@ -152,7 +152,7 @@
 					<div class="welcome-hero-form">
 						<div class="single-welcome-hero-form">
 							<h3>what?</h3>
-							<form action="index.html">
+							<form action="/">
 								<input type="text" placeholder="Ex: palce, resturent, food, automobile" />
 							</form>
 							<div class="welcome-hero-form-icon">
@@ -161,7 +161,7 @@
 						</div>
 						<div class="single-welcome-hero-form">
 							<h3>location</h3>
-							<form action="index.html">
+							<form action="/">
 								<input type="text" placeholder="Ex: london, newyork, rome" />
 							</form>
 							<div class="welcome-hero-form-icon">
@@ -973,7 +973,7 @@
 		           	<div class="row">
 			           	<div class="col-sm-3">
 			           		 <div class="navbar-header">
-				                <a class="navbar-brand" href="index.html">Ease<span>Stay</span></a>
+				                <a class="navbar-brand" href="/">Ease<span>Stay</span></a>
 				            </div><!--/.navbar-header-->
 			           	</div>
 			           	<div class="col-sm-9">
