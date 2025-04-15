@@ -174,9 +174,12 @@
 						</div>
 					</div>
 					<div class="welcome-hero-serch">
-						<button class="welcome-hero-btn" onclick="window.location.href='#'">
+						<form action="/map" method="POST">
+							@csrf
+							<button class="welcome-hero-btn" onclick="window.location.href='#'">
 							 search  <i data-feather="search"></i> 
-						</button>
+							</button>
+						</form>
 					</div>
 				</div>
 			</div>

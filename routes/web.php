@@ -20,6 +20,9 @@ Route::get('/user/{id}', [UserController::class, 'show'])->name('userProfile');
 Route::get('/loginview', [TemplateController::class,'loginview']);
 Route::get('/registerview', [TemplateController::class,'registerview']);
 Route::get('/map', [TemplateController::class,'map']);
+Route::get('/event-list', [TemplateController::class, 'eventList'])->name('eventList');
+Route::get('/events/{id}', [TemplateController::class, 'eventDetails'])->name('eventDetails');
+
 Route::get('/add-property', [PropertyController::class, 'showAddPropertyForm'])->name('addproperty.form');
 Route::post('/add-property', [PropertyController::class, 'addproperty'])->name('addproperty.submit');
 
