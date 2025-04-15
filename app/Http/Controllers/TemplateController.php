@@ -13,7 +13,8 @@ class TemplateController extends Controller
         return view('frontend/home');
     }
     public function profile(){
-        return view('frontend/profile');
+        $properties = Property::all(); // Fetch all properties
+        return view('frontend.master-profile', compact('properties'));
     }
 
     public function property(){

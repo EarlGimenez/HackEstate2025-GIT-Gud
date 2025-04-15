@@ -23,7 +23,8 @@ Route::get('/map', [TemplateController::class,'map']);
 Route::get('/event-list', [TemplateController::class, 'eventList'])->name('eventList');
 Route::get('/events/{id}', [TemplateController::class, 'eventDetails'])->name('eventDetails');
 
-
+Route::get('/add-property', [PropertyController::class, 'showAddPropertyForm'])->name('addproperty.form');
+Route::post('/add-property', [PropertyController::class, 'addproperty'])->name('addproperty.submit');
 
 // user handling
 Route::post('/login', [UserController::class,'login']);
@@ -32,7 +33,7 @@ Route::post('/register', [UserController::class,'registerweb']);
 
 //mock creation
 
-Route::get('/scan-id', function () {
+Route::post('/scan-id', function () {
     return view('scan-id');
 })->name('scan.id');
 
