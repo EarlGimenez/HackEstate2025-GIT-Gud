@@ -243,11 +243,11 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
 --------------------------------------*/
 .welcome-hero {
     position: relative;
-    background:url(../images/welcome-hero/banner.jpg)no-repeat;
+    /* background:url(../images/welcome-hero/banner.jpg)no-repeat;
     background-position:center;
-    background-size:cover;
+    background-size:cover;  */
     text-align: center;
-    height: 100vh;
+    /* height:800px; */
     z-index: 1;
 }
 .welcome-hero:before{
@@ -259,7 +259,7 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     height: 100%;
     background:rgba(65,73,89,.65);
     z-index: -1;
-}
+} */
 .welcome-hero-txt { padding-top: 155px;}
 
 .welcome-hero-txt h2 {
@@ -276,22 +276,9 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     margin-top: 25px;
 }
 
-.welcome-hero-serch-box {
-    position: absolute; /* Position it relative to the parent container */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Offset by 50% of its own width and height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: auto; /* Adjust width as needed */
-    margin: 0; /* Remove any conflicting margins */
-}
-
+.welcome-hero-serch-box{margin-top: 78px;display: flex;}
 .welcome-hero-form {
     display: flex;
-    justify-content: center;
-    align-items: center;
     background: #fff;
     height: 70px;
     border-radius: 3px;
