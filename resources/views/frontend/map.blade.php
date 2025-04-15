@@ -139,6 +139,13 @@
 		</section><!-- /.top-area-->
 		<!-- top-area End -->
 <section id="home" class="welcome-hero">
+	<div class="mb-3">
+        <label for="viewSelector" class="form-label">Map View:</label>
+        <select id="viewSelector" class="form-control" style="max-width: 200px;">
+          <option value="area">Grouped by Area</option>
+          <option value="pins">Show All Pins</option>
+        </select>
+      </div>
     <div class="welcome-hero-serch-box">
         <div class="welcome-hero-form">
             <div class="single-welcome-hero-form">
@@ -229,10 +236,10 @@
 		
 
 		<script>
-			// Set map center (Philippines as default)
+			// Initialize the map centered on the Philippines
 			var map = L.map('property-map').setView([13.41, 122.56], 6);
 		
-			// Add OpenStreetMap tile layer
+			// Add tile layer
 			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 				attribution: '© OpenStreetMap contributors'
 			}).addTo(map);
@@ -240,16 +247,112 @@
 			// Property data from Laravel
 			var properties = @json($properties);
 		
-			properties.forEach(function(property) {
-				if (property.latitude && property.longitude) {
-					var marker = L.marker([property.latitude, property.longitude]).addTo(map);
-					marker.bindPopup(`
-						<strong>${property.propName}</strong><br>
-						₱${property.propPrice.toLocaleString()}<br>
-						${property.propAddress}
-					`);
+			// Helper function to get color based on price
+			function getColor(price) {
+				return price < 1000000 ? 'green' :
+					   price < 5000000 ? 'orange' :
+					   price < 10000000 ? 'purple' :
+					   'blue';
+			}
+		
+			// Group properties by location (latitude+longitude key)
+			const grouped = {};
+			properties.forEach(prop => {
+				if (prop.latitude && prop.longitude) {
+					const key = `${prop.latitude},${prop.longitude}`;
+					if (!grouped[key]) grouped[key] = [];
+					grouped[key].push(prop);
 				}
 			});
+		
+			// Render bubbles
+			for (const key in grouped) {
+				const [lat, lng] = key.split(',').map(Number);
+				const group = grouped[key];
+				const count = group.length;
+				const avgPrice = group.reduce((sum, p) => sum + p.propPrice, 0) / count;
+		
+				// Draw circle
+				const circle = L.circle([lat, lng], {
+					color: getColor(avgPrice),
+					fillColor: getColor(avgPrice),
+					fillOpacity: 0.6,
+					radius: 500 * count // Adjust scale as needed
+				}).addTo(map);
+		
+				// Popup content
+				const popupContent = `
+					<strong>${count} properties</strong><br>
+					Average Price: ₱${Math.round(avgPrice).toLocaleString()}<br>
+					Location: ${group[0].propAddress || 'Unknown'}
+				`;
+		
+				circle.bindPopup(popupContent);
+			}
+
+			function clearMapLayers() {
+		map.eachLayer(function (layer) {
+			if (layer instanceof L.Circle || layer instanceof L.Marker) {
+				map.removeLayer(layer);
+			}
+		});
+	}
+
+	// Function to render grouped circles
+	function renderGroupedCircles() {
+		clearMapLayers();
+
+		for (const key in grouped) {
+			const [lat, lng] = key.split(',').map(Number);
+			const group = grouped[key];
+			const count = group.length;
+			const avgPrice = group.reduce((sum, p) => sum + p.propPrice, 0) / count;
+
+			const circle = L.circle([lat, lng], {
+				color: getColor(avgPrice),
+				fillColor: getColor(avgPrice),
+				fillOpacity: 0.6,
+				radius: 500 * count
+			}).addTo(map);
+
+			const popupContent = `
+				<strong>${count} properties</strong><br>
+				Average Price: ₱${Math.round(avgPrice).toLocaleString()}<br>
+				Location: ${group[0].propAddress || 'Unknown'}
+			`;
+			circle.bindPopup(popupContent);
+		}
+	}
+
+	// Function to render individual pins
+	function renderAllPins() {
+		clearMapLayers();
+
+		properties.forEach(prop => {
+			if (prop.latitude && prop.longitude) {
+				const marker = L.marker([prop.latitude, prop.longitude]).addTo(map);
+				const popupContent = `
+					<strong>${prop.propName || 'Property'}</strong><br>
+					Price: ₱${Math.round(prop.propPrice).toLocaleString()}<br>
+					Location: ${prop.propAddress || 'Unknown'}
+				`;
+				marker.bindPopup(popupContent);
+			}
+		});
+	}
+
+	// Initial render
+	renderGroupedCircles();
+
+	// Handle dropdown change
+	document.getElementById('viewSelector').addEventListener('change', function () {
+		if (this.value === 'area') {
+			renderGroupedCircles();
+		} else {
+			renderAllPins();
+		}
+	});
 		</script>
+		
 </body>
 </html>
