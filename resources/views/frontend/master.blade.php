@@ -89,7 +89,7 @@
 					<div class="header-top-right">
 						<ul>
 							<li class="header-top-contact">
-								User Name
+								<a href="/profile">user name</a>
 							</li>
 							<li class="header-top-contact">
 								<a href="/loginview">sign in</a>
