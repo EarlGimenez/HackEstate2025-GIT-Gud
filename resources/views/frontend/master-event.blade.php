@@ -201,48 +201,49 @@ https://templatemo.com/tm-558-klassy-cafe
         });
     </script> --}}
 
-    {{-- Leaflet JS on all properties --}}
-    {{-- <script>
-        document.addEventListener("DOMContentLoaded", function(){
-            const apiUrl = `http://localhost:8000/api/properties`;
-    
+    {{-- Leaflet JS on all events --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const apiUrl = `http://localhost:8000/api/events`;
+        
             fetch(apiUrl)
                 .then(response => response.json())
-                .then(properties => {
-                    if (!properties.length) {
-                        console.warn("No properties found.");
+                .then(events => {
+                    if (!events.length) {
+                        console.warn("No events found.");
                         return;
                     }
-    
-                    const firstLat = parseFloat(properties[0].latitude);
-                    const firstLng = parseFloat(properties[0].longitude);
+        
+                    const firstLat = parseFloat(events[0].latitude);
+                    const firstLng = parseFloat(events[0].longitude);
                     const map = L.map('propertyMap').setView([firstLat, firstLng], 13);
-    
+        
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
                         attribution: '© OpenStreetMap'
                     }).addTo(map);
-    
-                    properties.forEach(property => {
-                        const lat = parseFloat(property.latitude);
-                        const lng = parseFloat(property.longitude);
-                        const price = property.propPrice.toLocaleString();
-                        const name = property.propName;
-                        const desc = property.propDesc;
-    
+        
+                    events.forEach(event => {
+                        const lat = parseFloat(event.latitude);
+                        const lng = parseFloat(event.longitude);
+                        const name = event.name;
+                        const host = event.host;
+                        const date = event.date;
+        
                         L.marker([lat, lng])
                             .addTo(map)
-                            .bindPopup(`<strong>${name}</strong><br>${desc}<br><em>₱${price}</em>`);
+                            .bindPopup(`<strong>${name}</strong><br>Hosted by ${host}<br>${date}`);
                     });
                 })
                 .catch(error => {
-                    console.error("Error loading properties:", error);
+                    console.error("Error loading events:", error);
                 });
         });
-    </script> --}}
+        </script>
+        
     
     {{-- Leaflet JS on properties grouped by area --}}
-    <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function () {
             const map = L.map('propertyMap').setView([14.5995, 120.9842], 12);
         
@@ -280,7 +281,7 @@ https://templatemo.com/tm-558-klassy-cafe
                 })
                 .catch(err => console.error("Error loading area stats:", err));
         });
-        </script>
+        </script> --}}
         
     
     
