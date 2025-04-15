@@ -26,3 +26,13 @@ Route::get('/map', [TemplateController::class,'map']);
 Route::post('/login', [UserController::class,'login']);
 Route::post('/logout', [UserController::class,'logout']);
 Route::post('/register', [UserController::class,'registerweb']); 
+
+//mock creation
+
+Route::get('/scan-id', function () {
+    return view('scan-id');
+})->name('scan.id');
+
+Route::get('/scan-face', function () {
+    return view('scan-face');
+})->name('scan.face');
