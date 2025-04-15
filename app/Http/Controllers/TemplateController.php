@@ -38,4 +38,8 @@ class TemplateController extends Controller
     public function registerview(){
         return view('frontend/registerview');
     }
+
+    public function map(){
+        return view('frontend/map');
+    }
 }

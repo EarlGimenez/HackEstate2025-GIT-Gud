@@ -15,8 +15,9 @@ Route::get('/property-list', [TemplateController::class, 'propertyList']);
 Route::get('/users', [TemplateController::class, 'userList']);
 Route::get('/loginview', [TemplateController::class,'loginview']);
 Route::get('/registerview', [TemplateController::class,'registerview']);
+Route::get('/map', [TemplateController::class,'map']);
 
 // user handling
 Route::post('/login', [UserController::class,'login']);
 Route::post('/logout', [UserController::class,'logout']);
-Route::post('/register', [UserController::class,'registerweb']); //register, registerweb
+Route::post('/register', [UserController::class,'registerweb']); 
