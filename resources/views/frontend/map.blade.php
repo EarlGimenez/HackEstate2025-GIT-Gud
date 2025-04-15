@@ -43,6 +43,12 @@
         
         <!--responsive.css-->
         <link rel="stylesheet" href="assets/css/responsive.css">
+
+		<!-- Leaflet CSS -->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+
+		<!-- Leaflet JS -->
+		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
         
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -81,11 +87,12 @@
                             search  <i data-feather="search"></i> 
                     </button>
                 </div>
+				
         </div>
-
+		
 		</section><!--/.welcome-hero-->
 		<!--welcome-hero end -->
-
+		<div id="property-map" style="height: 600px; width: 100%; margin-bottom: 15rem;"></div>
 		<!--list-topics start -->
 		<section id="list-topics" class="list-topics">
 			<div class="container">
@@ -141,5 +148,30 @@
 			</div><!--/.container-->
 
 		</section><!--/.list-topics-->
+		
+
+		<script>
+			// Set map center (Philippines as default)
+			var map = L.map('property-map').setView([13.41, 122.56], 6);
+		
+			// Add OpenStreetMap tile layer
+			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				attribution: '© OpenStreetMap contributors'
+			}).addTo(map);
+		
+			// Property data from Laravel
+			var properties = @json($properties);
+		
+			properties.forEach(function(property) {
+				if (property.latitude && property.longitude) {
+					var marker = L.marker([property.latitude, property.longitude]).addTo(map);
+					marker.bindPopup(`
+						<strong>${property.propName}</strong><br>
+						₱${property.propPrice.toLocaleString()}<br>
+						${property.propAddress}
+					`);
+				}
+			});
+		</script>
 </body>
 </html>

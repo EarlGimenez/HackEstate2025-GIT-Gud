@@ -40,7 +40,8 @@ class TemplateController extends Controller
     }
 
     public function map(){
-        return view('frontend/map');
+        $properties = Property::select('id', 'propName', 'latitude', 'longitude', 'propPrice', 'propAddress')->get();
+        return view('frontend/map', compact('properties'));
     }
     
 }
